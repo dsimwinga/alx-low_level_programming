@@ -19,7 +19,7 @@ for (c = '0' ; c <= '9' ; c++)
 		{
 		putchar(c);
 		putchar(b);
-		if (!(b == 9 && c == 8))
+		if (!(b == '9' && c == '8'))
 		{
 		putchar(',');
 		putchar(' ');
