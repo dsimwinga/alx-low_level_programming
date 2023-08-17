@@ -1,30 +1,19 @@
 #include <stdio.h>
 
 /**
- *main - my main function
- *Return: return 0 at success
- *
+ * main - my main function
+ * Return: return 0 at success
  */
 
 int main(void)
 {
-	long num = 612852475143;
-	long lgst_prime = 2;
+	unsigned long int i, n = 612852475143;
 
-while (num > 1)
-
-{
-
-	if (num % lgst_prime == 0)
-		{
-		num /= lgst_prime;
-		}
-
-	else
+	for (i = 3 ; i < 782849 ; i = i + 2)
 	{
-		lgst_prime++;
-		printf("%ld\n", lgst_prime);
+		while ((n % i == 0) && (n != i))
+			n = n / i;
 	}
-}
-		return (0);
+	printf("%lu\n", n);
+	return (0);
 }
