@@ -1,10 +1,10 @@
 #include "main.h"
 
 /**
- *_isupper - my main function
- *@c: checks is uppercase
- *Return: return 1 and 0
- **/
+*_isupper - my main function
+*@c: checks is uppercase
+*Return: return 1 and 0
+*/
 
 int _isupper(int c)
 {
