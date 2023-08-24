@@ -1,34 +1,31 @@
 #include "main.h"
 
 /**
- **cap_string - Capitalizes the first letter of each word in the given string
+ *cap_string - Capitalizes the first letter of each word in the given string
  *@str: parameter
  *Return: str
  */
-
 char *cap_string(char *str)
 {
-	int index = 0;
+	int i;
+	int is_new_word = 1;
 
-while (str[index])
-{
-	int i, j;
-	char c[] = {44, 59, 46, '!', '?', '"', '(', ')', '{', '}', ' ', '\t', '\n'};
-
-	for (i = 0 ; str[i] != '\0' ; i++)
+	for (i = 0; str[i] != '\0'; i++)
 	{
-		if (i == 0 && str[i] >= 'a' && str[i] <= 'z')
+		if (is_new_word && (str[i] >= 'a' && str[i] <= 'z'))
 		{
-			str[i] = str[i] - 32;
+			str[i] -= 32;
+			is_new_word = 0;
 		}
-	for (j = 0 ; c[j] != '\0' ; j++)
-	{
-		if (c[j] == str[i] && (str[i + 1] >= 'a' && str[i + 1] <= 'z'))
+
+		if (str[i] == ' ' || str[i] == '\t' || str[i] == '\n' || str[i] == ',' ||
+			str[i] == ';' || str[i] == '.' || str[i] == '!' || str[i] == '?' ||
+			str[i] == '"' || str[i] == '(' || str[i] == ')' || str[i] == '{' ||
+			str[i] == '}')
 		{
-			str[i + 1] = str[i + 1] - 32;
+			is_new_word = 1;
 		}
 	}
-	}
+	return (str);
 }
-return (str);
-}
+
