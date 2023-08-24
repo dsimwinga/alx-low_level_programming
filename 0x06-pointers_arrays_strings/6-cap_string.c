@@ -23,7 +23,8 @@ char *cap_string(char *str)
 			str[i] == '"' || str[i] == '(' || str[i] == ')' || str[i] == '{' ||
 			str[i] == '}' || is_new_word == 1)
 		{
-			is_new_word++;
+			str[is_new_word] -= 32;
+				is_new_word++;
 		}
 	}
 	return (str);
