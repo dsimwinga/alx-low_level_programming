@@ -1,4 +1,3 @@
-julien@ubuntu:~/0x0a. malloc, free$ cat 100-main.c
 #include "main.h"
 #include <stdio.h>
 #include <stdlib.h>
