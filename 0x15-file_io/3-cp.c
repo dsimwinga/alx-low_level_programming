@@ -10,7 +10,7 @@ int comp_close(int);
 int main(int argc, char *argv[])
 {
 	char buffer[1024];
-	int bytes_read = 0, _EOF = 1, from_fd = -1, to_fd = -1, error = 0;
+	int bytesR = 0, e = 1, from = -1, to = -1, err = 0;
 
 	if (argc != 3)
 	{
@@ -18,51 +18,51 @@ int main(int argc, char *argv[])
 		exit(97);
 	}
 
-	from_fd = open(argv[1], O_RDONLY);
-	if (from_fd < 0)
+	from = open(argv[1], O_RDONLY);
+	if (from < 0)
 	{
 		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", argv[1]);
 		exit(98);
 	}
 
-	to_fd = open(argv[2], O_WRONLY | O_TRUNC | O_CREAT, 0664);
-	if (to_fd < 0)
+	to = open(argv[2], O_WRONLY | O_TRUNC | O_CREAT, 0664);
+	if (to < 0)
 	{
 		dprintf(STDERR_FILENO, "Error: Can't write to %s\n", argv[2]);
-		comp_close(from_fd);
+		comp_close(from);
 		exit(99);
 	}
 
-	while (_EOF)
+	while (e)
 	{
-		_EOF = read(from_fd, buffer, 1024);
-		if (_EOF < 0)
+		e = read(from, buffer, 1024);
+		if (e < 0)
 		{
 			dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", argv[1]);
-			comp_close(from_fd);
-			comp_close(to_fd);
+			comp_close(from);
+			comp_close(to);
 			exit(98);
 		}
-		else if (_EOF == 0)
+		else if (e == 0)
 			break;
-		bytes_read += _EOF;
-		error = write(to_fd, buffer, _EOF);
-		if (error < 0)
+		bytesR += e;
+		err = write(to, buffer, e);
+		if (err < 0)
 		{
 			dprintf(STDERR_FILENO, "Error: Can't write to %s\n", argv[2]);
-			comp_close(from_fd);
-			comp_close(to_fd);
+			comp_close(from);
+			comp_close(to);
 			exit(99);
 		}
 	}
-	error = comp_close(to_fd);
-	if (error < 0)
+	err = comp_close(to);
+	if (err < 0)
 	{
-		comp_close(from_fd);
+		comp_close(from);
 		exit(100);
 	}
-	error = comp_close(from_fd);
-	if (error < 0)
+	err = comp_close(from);
+	if (err < 0)
 		exit(100);
 	return (0);
 }
